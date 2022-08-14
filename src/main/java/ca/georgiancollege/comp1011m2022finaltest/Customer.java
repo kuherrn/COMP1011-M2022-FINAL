@@ -42,12 +42,12 @@ public class Customer {
         return products;
     }
 
-    public float getPurchases() {
+    public String getPurchases() {
         float salePrice = 0.0f;
         for (var product:getProducts()) {
             salePrice += product.getSalePrice();
         }
-        return salePrice;
+        return "$" + salePrice;
     }
 
     public Customer(int id, String firstName, String lastName, String phone, Product[] products) {
