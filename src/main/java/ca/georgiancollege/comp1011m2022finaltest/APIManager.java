@@ -1,7 +1,9 @@
 package ca.georgiancollege.comp1011m2022finaltest;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URI;
@@ -12,6 +14,7 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class APIManager
 {
@@ -35,14 +38,14 @@ public class APIManager
 
     /* TODO -- Fill in with useful methods to read Customer information */
 
-    public Customer getCustomer () throws IOException {
-        URL url = getClass().getResource("customers.json");
+    public CustomerArrayList getCustomerList () throws IOException {
+        String filePath = new File("COMP1011-M2022-Final-Test/customers.json").getAbsolutePath();
 
         try {
             Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Paths.get(String.valueOf(url)));
+            Reader reader = Files.newBufferedReader(Paths.get(filePath));
 
-            return gson.fromJson(reader, Customer.class);
+            return gson.fromJson(reader, CustomerArrayList.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

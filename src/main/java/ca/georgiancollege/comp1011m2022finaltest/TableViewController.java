@@ -1,13 +1,20 @@
 package ca.georgiancollege.comp1011m2022finaltest;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
-public class TableViewController {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class TableViewController implements Initializable {
+
     @FXML
     private Label saleLabel;
 
@@ -60,5 +67,26 @@ public class TableViewController {
     private void loadAllCustomers()
     {
         System.out.println("called method loadAllCustomers");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        purchaseListView.getItems().clear();
+
+        try {
+            var customerList = APIManager.Instance().getCustomerList();
+            idColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
+            firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
+            lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("LastName"));
+            phoneColumn.setCellValueFactory(new PropertyValueFactory<>("Phone"));
+            totalPurchaseColumn.setCellValueFactory(new PropertyValueFactory<>("Purchases"));
+
+            tableView.getItems().addAll(customerList.getCustomers());
+//            System.out.println(customerList.getCustomers()[0].getPurchases());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

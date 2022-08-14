@@ -11,13 +11,13 @@ public class Product {
   @SerializedName("name")
   private String name;
 
-  @SerializedName("sale price")
+  @SerializedName("salePrice")
   private float salePrice;
 
-  @SerializedName("regular price")
+  @SerializedName("regularPrice")
   private float regularPrice;
 
-  @SerializedName("poster")
+  @SerializedName("image")
   private String poster;
 
   public String getSku() {
