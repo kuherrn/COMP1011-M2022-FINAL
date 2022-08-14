@@ -15,7 +15,9 @@
     "phoneNumber": "905-401-7824",
     "pounds": 226.6,
     "heightInCM": 156,
-    "purchases": [{
+    "purchases":
+    [
+      {
       "id": 78,
       "sku": "woo-vneck-tee-blue",
       "name": "V-Neck T-Shirt - Blue",
@@ -48,7 +50,9 @@
       "phoneNumber": "819-456-6014",
       "pounds": 183.9,
       "heightInCM": 182,
-      "purchases": [{
+      "purchases":
+      [
+        {
         "id": 85,
         "sku": "Woo-beanie-logo",
         "name": "Beanie with Logo",
@@ -97,7 +101,9 @@
       "phoneNumber": "780-525-6148",
       "pounds": 185.2,
       "heightInCM": 163,
-      "purchases": [{
+      "purchases":
+      [
+        {
         "id": 83,
         "sku": "Woo-tshirt-logo",
         "name": "T-Shirt with Logo",

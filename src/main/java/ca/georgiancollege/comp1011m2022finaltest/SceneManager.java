@@ -1,4 +1,4 @@
-package ca.georgiancollege.comp1011m2022ice9;
+package ca.georgiancollege.comp1011m2022finaltest;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

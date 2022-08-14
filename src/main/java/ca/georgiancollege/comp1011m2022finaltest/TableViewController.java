@@ -1,4 +1,4 @@
-package com.example.w22comp1011gctest2student;
+package ca.georgiancollege.comp1011m2022finaltest;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

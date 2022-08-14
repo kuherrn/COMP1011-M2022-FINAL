@@ -1,11 +1,17 @@
-package ca.georgiancollege.comp1011m2022ice9;
+package ca.georgiancollege.comp1011m2022finaltest;
 
 import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class APIManager
 {
@@ -27,96 +33,18 @@ public class APIManager
     }
     /*********************************************************************/
 
-    public Movie getMovieFromOMDBByTitleAndYear(String title, String year)
-    {
-        // Step 1. Construct your URL
-        String APIKey = "769bf72f";
-        title = title.replace(" ", "%20");
-        String URL = "https://www.omdbapi.com/?apikey=" + APIKey + "&t=" + title + "&y=" + year;
+    /* TODO -- Fill in with useful methods to read Customer information */
 
-        // Step 2. Create a Client Object
-        HttpClient client = HttpClient.newHttpClient();
+    public Customer getCustomer () throws IOException {
+        URL url = getClass().getResource("customers.json");
 
-        // Step 3. Create a Request Object
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(URL)).build();
-
-        try
-        {
-            // Step 4. Create a Response object
-            HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-            // Step 5. Create a Gson object
+        try {
             Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get(String.valueOf(url)));
 
-            // Step 6. Deserialize the data using the fromJSON method
-            return gson.fromJson(response.body(), Movie.class);
-        }
-        catch(Exception exception)
-        {
-            exception.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public MovieSearchResults getMovieFromOMDBBySearchTerm(String searchTerm)
-    {
-        // Step 1. Construct your URL
-        String APIKey = "769bf72f";
-        searchTerm = searchTerm.replace(" ", "%20");
-        String URL = "https://www.omdbapi.com/?apikey=" + APIKey + "&s=" + searchTerm;
-
-        // Step 2. Create a Client Object
-        HttpClient client = HttpClient.newHttpClient();
-
-        // Step 3. Create a Request Object
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(URL)).build();
-
-        try
-        {
-            // Step 4. Create a Response object
-            HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-            // Step 5. Create a Gson object
-            Gson gson = new Gson();
-
-            // Step 6. Deserialize the data using the fromJSON method
-            return gson.fromJson(response.body(), MovieSearchResults.class);
-        }
-        catch(Exception exception)
-        {
-            exception.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public Movie getMovieFromOMDBByID(String imdbID)
-    {
-        // Step 1. Construct your URL
-        String APIKey = "769bf72f";
-        String URL = "https://www.omdbapi.com/?apikey=" + APIKey + "&i=" + imdbID;
-
-        // Step 2. Create a Client Object
-        HttpClient client = HttpClient.newHttpClient();
-
-        // Step 3. Create a Request Object
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(URL)).build();
-
-        try
-        {
-            // Step 4. Create a Response object
-            HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-            // Step 5. Create a Gson object
-            Gson gson = new Gson();
-
-            // Step 6. Deserialize the data using the fromJSON method
-            return gson.fromJson(response.body(), Movie.class);
-        }
-        catch(Exception exception)
-        {
-            exception.printStackTrace();
+            return gson.fromJson(reader, Customer.class);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return null;
