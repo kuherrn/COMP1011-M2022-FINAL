@@ -74,8 +74,10 @@ public class TableViewController implements Initializable {
 
         purchaseListView.getItems().clear();
 
+
         try {
             var customerList = APIManager.Instance().getCustomerList();
+            rowsInTableLabel.setText("Rows in table: " + customerList.getCustomers().length);
             idColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
             firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
             lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("LastName"));

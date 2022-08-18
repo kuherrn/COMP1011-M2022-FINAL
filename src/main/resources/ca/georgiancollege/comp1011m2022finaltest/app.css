@@ -1,0 +1,12 @@
+.system {
+    -fx-font: 12pt "Helvetica Neue";
+}
+
+.heading {
+    -fx-font-size: 40px;
+    -fx-font-family: "Arial Black";
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+}
