@@ -77,7 +77,6 @@ public class TableViewController implements Initializable {
 
         try {
             var customerList = APIManager.Instance().getCustomerList();
-            rowsInTableLabel.setText("Rows in table: " + customerList.getCustomers().length);
             idColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
             firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
             lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("LastName"));
@@ -85,6 +84,15 @@ public class TableViewController implements Initializable {
             totalPurchaseColumn.setCellValueFactory(new PropertyValueFactory<>("Purchases"));
 
             tableView.getItems().addAll(customerList.getCustomers());
+            rowsInTableLabel.setText("Rows in table: " + tableView.getItems().size());
+
+            tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldCustomer, newCustomer) -> {
+                purchaseListView.getItems().clear();
+                if (newCustomer.getProducts() != null) {
+                    purchaseListView.getItems().addAll(newCustomer.getProducts());
+                    purchaseListView.getSelectionModel().select(0);
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

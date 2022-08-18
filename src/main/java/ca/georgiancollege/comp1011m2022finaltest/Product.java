@@ -44,6 +44,6 @@ public class Product {
 
   @Override
   public String toString() {
-    return String.format("%s - $%f", this.getName(), this.getRegularPrice());
+    return String.format("%s - $%.2f", this.getName(), this.getRegularPrice());
   }
 }
