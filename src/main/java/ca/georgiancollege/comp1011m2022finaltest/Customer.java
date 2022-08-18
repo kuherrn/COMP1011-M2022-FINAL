@@ -42,14 +42,34 @@ public class Customer {
         return products;
     }
 
+    // Methods
     public String getPurchases() {
-        float salePrice = 0.0f;
+        double salePrice = 0.0f;
         for (var product:getProducts()) {
             salePrice += product.getSalePrice();
         }
         return "$" + salePrice;
     }
 
+    public String getOriginalPurchases() {
+        double originalPrice = 0.0f;
+        for (var product:getProducts()) {
+            originalPrice += product.getRegularPrice();
+        }
+        return "$" + originalPrice;
+    }
+
+    public String getDiscounts() {
+        double discountTotal = 0.0f;
+        discountTotal = Double.parseDouble(getOriginalPurchases().substring(1)) - Double.parseDouble(getPurchases().substring(1));
+        return "$" + discountTotal;
+    }
+
+    public boolean customersSavedOver5() {
+        return Double.parseDouble(getDiscounts().substring(1)) > 5.0;
+    }
+
+    // Constructor
     public Customer(int id, String firstName, String lastName, String phone, Product[] products) {
         this.id = id;
         this.firstName = firstName;

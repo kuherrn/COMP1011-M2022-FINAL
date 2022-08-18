@@ -44,7 +44,6 @@ public class APIManager
         try {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get(filePath));
-
             return gson.fromJson(reader, CustomerArrayList.class);
         } catch (Exception e) {
             e.printStackTrace();

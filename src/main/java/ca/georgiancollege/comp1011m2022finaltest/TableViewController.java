@@ -83,7 +83,6 @@ public class TableViewController implements Initializable {
             totalPurchaseColumn.setCellValueFactory(new PropertyValueFactory<>("Purchases"));
 
             tableView.getItems().addAll(customerList.getCustomers());
-//            System.out.println(customerList.getCustomers()[0].getPurchases());
         } catch (IOException e) {
             e.printStackTrace();
         }

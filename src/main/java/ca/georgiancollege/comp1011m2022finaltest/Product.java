@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product {
 
+  // Properties
   @SerializedName("sku")
   private String sku;
 
@@ -20,6 +21,7 @@ public class Product {
   @SerializedName("image")
   private String poster;
 
+  // Getters
   public String getSku() {
     return sku;
   }
