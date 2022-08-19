@@ -91,6 +91,10 @@ public class TableViewController implements Initializable {
                 if (newCustomer.getProducts() != null) {
                     purchaseListView.getItems().addAll(newCustomer.getProducts());
                     purchaseListView.getSelectionModel().select(0);
+
+                    msrpLabel.setText(String.format("Total Regular Price: $%.2f", Double.parseDouble(newCustomer.getOriginalPurchases().substring(1))));
+                    saleLabel.setText(String.format("Total Sale Price: $%.2f", Double.parseDouble(newCustomer.getPurchases().substring(1))));
+                    savingsLabel.setText(String.format("Total Savings: $%.2f", Double.parseDouble(newCustomer.getDiscounts().substring(1))));
                 }
             });
         } catch (IOException e) {
