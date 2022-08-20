@@ -98,7 +98,20 @@ public class TableViewController implements Initializable {
     @FXML
     private void loadAllCustomers()
     {
-        System.out.println("called method loadAllCustomers");
+        purchaseListView.getItems().clear();
+        tableView.getItems().clear();
+        tableView.getSelectionModel().select(0);
+
+        try {
+            var customerList = APIManager.Instance().getCustomerList();
+            tableView.getItems().addAll(customerList.getCustomers());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        msrpLabel.setText("Total Regular Price:");
+        saleLabel.setText("Total Sale Price:");
+        savingsLabel.setText("Total Savings:");
     }
 
     @Override
@@ -141,7 +154,6 @@ public class TableViewController implements Initializable {
                 }
             });
         } catch (IOException e) {
-            System.out.println("Customer does not belong in the selected category!");
             e.printStackTrace();
         }
 
