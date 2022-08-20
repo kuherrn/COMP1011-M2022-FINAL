@@ -4,8 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
-public class Customer {
+public class Customer implements Comparable<Customer> {
     @SerializedName("id")
     private int id;
 
@@ -68,6 +69,19 @@ public class Customer {
     public boolean customersSavedOver5() {
         return Double.parseDouble(getDiscounts().substring(1)) > 5.0;
     }
+
+    @Override
+    public int compareTo(Customer otherCustomer) {
+        if(Double.parseDouble(this.getPurchases().substring(1)) < Double.parseDouble(otherCustomer.getPurchases().substring(1))) {
+            return 1;
+        }
+        else if (Double.parseDouble(this.getPurchases().substring(1)) > Double.parseDouble(otherCustomer.getPurchases().substring(1))) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
 
     // Constructor
     public Customer(int id, String firstName, String lastName, String phone, Product[] products) {

@@ -11,13 +11,12 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TableViewController implements Initializable {
 
     private ArrayList<Customer> saved5Dollars = new ArrayList<>();
+    private List<Customer> topSpenders = new ArrayList<>();
 
     @FXML
     private Label saleLabel;
@@ -58,7 +57,22 @@ public class TableViewController implements Initializable {
     @FXML
     private void top10Customers()
     {
-        System.out.println("called method top10Customers()");
+        purchaseListView.getItems().clear();
+        tableView.getItems().clear();
+
+        try {
+            Customer[] topSpenders = new Customer[10];
+            for (int i = 0; i < 10; i++) {
+                topSpenders[i] = this.topSpenders.get(i);
+            }
+
+            tableView.getItems().addAll(topSpenders);
+            rowsInTableLabel.setText("Rows in table: " + tableView.getItems().size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        tableView.getSelectionModel().select(0);
     }
 
     @FXML
@@ -66,15 +80,8 @@ public class TableViewController implements Initializable {
     {
         purchaseListView.getItems().clear();
         tableView.getItems().clear();
-        tableView.getSelectionModel().select(0);
 
         try {
-//            idColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
-//            firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
-//            lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("LastName"));
-//            phoneColumn.setCellValueFactory(new PropertyValueFactory<>("Phone"));
-//            totalPurchaseColumn.setCellValueFactory(new PropertyValueFactory<>("Purchases"));
-
             Customer[] customer5dollars = new Customer[this.saved5Dollars.size()];
             for (int i = 0; i < customer5dollars.length; i++) {
                 customer5dollars[i] = this.saved5Dollars.get(i);
@@ -85,6 +92,7 @@ public class TableViewController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        tableView.getSelectionModel().select(0);
     }
 
     @FXML
@@ -111,18 +119,19 @@ public class TableViewController implements Initializable {
 
             if (this.saved5Dollars.isEmpty()) {
                 for (var customer : customerList.getCustomers()) {
+                    topSpenders.add(customer);
                     if(Double.parseDouble(customer.getDiscounts().substring(1)) > 5.00d) {
-//                        System.out.println(customer.getFirstName());
                         saved5Dollars.add(customer);
                     }
                 }
+                Collections.sort(topSpenders);
             }
 
             rowsInTableLabel.setText("Rows in table: " + tableView.getItems().size());
 
             tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldCustomer, newCustomer) -> {
                 purchaseListView.getItems().clear();
-                if (newCustomer.getProducts() != null) {
+                if (newCustomer != null && newCustomer.getProducts() != null) {
                     purchaseListView.getItems().addAll(newCustomer.getProducts());
                     purchaseListView.getSelectionModel().select(0);
 

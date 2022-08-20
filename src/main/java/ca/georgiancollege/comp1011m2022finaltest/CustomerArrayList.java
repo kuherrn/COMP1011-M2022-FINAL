@@ -3,6 +3,7 @@ package ca.georgiancollege.comp1011m2022finaltest;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class CustomerArrayList {
     @SerializedName("Customers")
