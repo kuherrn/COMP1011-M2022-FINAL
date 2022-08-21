@@ -146,13 +146,19 @@ public class TableViewController implements Initializable {
             tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldCustomer, newCustomer) -> {
                 purchaseListView.getItems().clear();
                 if (newCustomer != null && newCustomer.getProducts() != null) {
+
                     purchaseListView.getItems().addAll(newCustomer.getProducts());
                     purchaseListView.getSelectionModel().select(0);
+                    // Performance needs to be improved
                     purchaseListView.getSelectionModel().selectedItemProperty().addListener((obse, oldPurchase, newPurchase) -> {
-                        try {
-                            imageView.setImage(new Image(newPurchase.getPoster()));
-                        } catch (Exception e) {
-                            imageView.setImage(null);
+                        if (newPurchase != null) {
+                            try {
+                                imageView.setImage(new Image(newPurchase.getPoster()));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            imageView.setImage(new Image("https://upload.wikimedia.org/wikipedia/commons/b/b1/Grey_background.jpg"));
                         }
                     });
 
