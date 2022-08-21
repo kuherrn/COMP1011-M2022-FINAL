@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
@@ -147,6 +148,13 @@ public class TableViewController implements Initializable {
                 if (newCustomer != null && newCustomer.getProducts() != null) {
                     purchaseListView.getItems().addAll(newCustomer.getProducts());
                     purchaseListView.getSelectionModel().select(0);
+                    purchaseListView.getSelectionModel().selectedItemProperty().addListener((obse, oldPurchase, newPurchase) -> {
+                        try {
+                            imageView.setImage(new Image(newPurchase.getPoster()));
+                        } catch (Exception e) {
+                            imageView.setImage(null);
+                        }
+                    });
 
                     msrpLabel.setText(String.format("Total Regular Price: $%.2f", Double.parseDouble(newCustomer.getOriginalPurchases().substring(1))));
                     saleLabel.setText(String.format("Total Sale Price: $%.2f", Double.parseDouble(newCustomer.getPurchases().substring(1))));
